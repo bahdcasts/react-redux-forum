@@ -1,5 +1,20 @@
+
+@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700');
+
+.navbar-forum {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,.04);
+}
 body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+  background-color: #f5f8fa;
+  color: #212529;
+  font-family: "Source Code Pro", sans-serif;
+  font-size: 0.9rem;
+}
+.btn-xs {
+  padding: .1rem .25rem;
+  font-size: 0.8rem;
+}
+* {
+  border-radius: 0px !important;
 }
