@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 const Channels = () => (
   <ul className="list-group">
@@ -17,4 +18,8 @@ const Channels = () => (
   </ul>
 );
 
-export default Channels;
+const mapStateToProps = state => ({
+  channels: state.channels
+});
+
+export default connect(mapStateToProps)(Channels);
