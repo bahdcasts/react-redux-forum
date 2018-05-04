@@ -15,10 +15,14 @@ class HomeContainer extends Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+  threads: state.threads
+}) 
+
 const mapDispatchToProps = (dispatch) => ({
   getThreads: () => {
     dispatch(getThreads())
   }
 })
 
-export default connect(null, mapDispatchToProps)(HomeContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer);
