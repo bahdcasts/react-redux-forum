@@ -28,6 +28,7 @@ class HomeContainer extends Component {
             threads={this.props.threadsData.data}
             handlePageChange={this.handlePageChange}
             pageCount={this.getPageCount(this.props.threadsData.total, this.props.threadsData.per_page)}
+            currentPage={this.props.threadsData.current_page - 1}
           />
         }
         {
