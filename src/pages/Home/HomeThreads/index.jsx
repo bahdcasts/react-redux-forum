@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
+import ReactPaginate from 'react-paginate';
 
-const HomeThreads = ({ threads }) => (
+const HomeThreads = ({ threads, handlePageChange, pageCount }) => (
   <Fragment>
     {threads.map(thread => (
       <div key={thread.id} className="card mb-3">
@@ -19,15 +20,20 @@ const HomeThreads = ({ threads }) => (
       </div>
     ))}
     <div className="row justify-content-center my-5">
-      <nav aria-label="Page navigation example">
-        <ul className="pagination">
-          <li className="page-item"><a className="page-link" href="">Previous</a></li>
-          <li className="page-item"><a className="page-link" href="">1</a></li>
-          <li className="page-item"><a className="page-link" href="">2</a></li>
-          <li className="page-item"><a className="page-link" href="">3</a></li>
-          <li className="page-item"><a className="page-link" href="">Next</a></li>
-        </ul>
-      </nav>
+      <ReactPaginate
+        containerClassName="pagination"
+        pageClassName="page-item"
+        pageLinkClassName="page-link"
+        activeClassName="active"
+        previousClassName="page-item"
+        nextClassName="page-item"
+        previousLinkClassName="page-link"
+        nextLinkClassName="page-link"
+        disabledClassName="disabled"
+        breakClassName="page-link"
+        onPageChange={handlePageChange}
+        pageCount={pageCount}
+      />
     </div>
   </Fragment>
 );

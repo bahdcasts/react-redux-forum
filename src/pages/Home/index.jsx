@@ -8,10 +8,22 @@ class HomeContainer extends Component {
   componentWillMount() {
     this.props.getThreads();
   }
+
+  getPageCount = (total, perPage) => {
+    return Math.ceil(total / perPage);
+  }
+
+  handlePageChange = (page) => {
+    this.props.getThreads(page.selected + 1);
+  }
+
   render() {
+    console.log(this.props.threadsData)
     return (
       <HomeThreads
         threads={this.props.threadsData.data}
+        handlePageChange={this.handlePageChange}
+        pageCount={this.getPageCount(this.props.threadsData.total, this.props.threadsData.per_page)}
       />
     );
   }
@@ -22,8 +34,8 @@ const mapStateToProps = (state) => ({
 }) 
 
 const mapDispatchToProps = (dispatch) => ({
-  getThreads: () => {
-    dispatch(getThreads())
+  getThreads: (page) => {
+    dispatch(getThreads(page))
   }
 })
 
