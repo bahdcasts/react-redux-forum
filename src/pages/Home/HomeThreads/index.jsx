@@ -1,24 +1,11 @@
 import React, { Fragment } from 'react';
 import ReactPaginate from 'react-paginate';
 
+import Thread from '../../../components/Thread'
+
 const HomeThreads = ({ threads, handlePageChange, pageCount, currentPage }) => (
   <Fragment>
-    {threads.map(thread => (
-      <div key={thread.id} className="card mb-3">
-        <div className="card-header">
-          <img src="http://i.pravatar.cc/300" className="mr-3 rounded-circle" width="30px" height="30px" alt="" />
-          <span className="text-sm text-muted">{thread.creator.name}, <b>3 hrs ago</b></span>
-          <a href="" className="btn btn-info btn-xs float-right">view thread</a>
-        </div>
-        <div className="card-body">
-          <h5 className="text-center">{thread.title}</h5>
-        </div>
-        <div className="card-footer text-muted">
-          <span>{thread.replies_count} replies</span>
-          <a href="" className="btn btn-primary float-right btn-xs">{thread.channel.name}</a>
-        </div>
-      </div>
-    ))}
+    {threads.map(thread => <Thread thread={thread} key={thread.id} />)}
     <div className="row justify-content-center my-5">
       <ReactPaginate
         containerClassName="pagination"
