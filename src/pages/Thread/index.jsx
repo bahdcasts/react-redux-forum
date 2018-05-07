@@ -23,6 +23,7 @@ class ThreadContainer extends React.Component {
     this.props.getReplies(id, page.selected + 1)
   }
   render() {
+    console.log(this.props)
     return (
       <Fragment>
         {
@@ -32,6 +33,7 @@ class ThreadContainer extends React.Component {
             replies={this.props.replies}
             getPageCount={this.getPageCount}
             handlePageChange={this.handlePageChange}
+            loadingReplies={this.props.loadingReplies}
           />
         }
         {

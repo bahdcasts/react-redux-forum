@@ -1,4 +1,4 @@
-import { GET_REPLIES, GET_REPLIES_LOADED } from '../actions/replies'
+import { GET_REPLIES, GET_REPLIES_LOADED, GET_REPLIES_LOADING } from '../actions/replies'
 import { GET_THREAD, GET_THREAD_LOADED, GET_THREAD_LOADING } from '../actions/threads'
 
 const threadReducer = (state = { loading: true, loadingReplies: true, replies: { data: [] } }, action) => {
@@ -22,6 +22,11 @@ const threadReducer = (state = { loading: true, loadingReplies: true, replies: {
        return {
          ...state,
          replies: action.payload
+       }
+     case GET_REPLIES_LOADING:
+       return {
+         ...state,
+         loadingReplies: true
        }
      case GET_REPLIES_LOADED:
        return {
