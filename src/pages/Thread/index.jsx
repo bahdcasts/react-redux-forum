@@ -5,10 +5,13 @@ import SingleThread from './SingleThread'
 import Loader from '../../components/Loader'
 
 import { getThread } from '../../store/actions/threads'
+import { getReplies } from '../../store/actions/replies'
 
 class ThreadContainer extends React.Component {
   componentWillMount() {
-    this.props.getThread(this.props.match.params.id)
+    const { id } = this.props.match.params
+    this.props.getThread(id)
+    this.props.getReplies(id)
   }
   render() {
     return (
@@ -30,12 +33,17 @@ class ThreadContainer extends React.Component {
 
 const mapStateToProps = (state) => ({
   thread: state.thread.data,
-  loading: state.thread.loading
+  loading: state.thread.loading,
+  loadingReplies: state.thread.loadingReplies,
+  replies: state.thread.replies
 })
 
 const mapDispatchToProps = (dispatch) => ({
   getThread: (id) => {
     dispatch(getThread(id))
+  },
+  getReplies: (id) => {
+    dispatch(getReplies(id))
   }
 })
 
