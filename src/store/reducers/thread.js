@@ -1,6 +1,6 @@
 import { GET_THREAD, GET_THREAD_LOADED, GET_THREAD_LOADING } from '../actions/threads'
 
-const threadReducer = (state = {}, action) => {
+const threadReducer = (state = { loading: true }, action) => {
    switch (action.type) {
      case GET_THREAD:
        return {
