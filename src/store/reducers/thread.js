@@ -1,7 +1,7 @@
 import { GET_REPLIES, GET_REPLIES_LOADED } from '../actions/replies'
 import { GET_THREAD, GET_THREAD_LOADED, GET_THREAD_LOADING } from '../actions/threads'
 
-const threadReducer = (state = { loading: true, loadingReplies: true }, action) => {
+const threadReducer = (state = { loading: true, loadingReplies: true, replies: { data: [] } }, action) => {
    switch (action.type) {
      case GET_THREAD:
        return {

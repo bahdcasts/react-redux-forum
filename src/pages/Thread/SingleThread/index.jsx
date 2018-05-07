@@ -1,8 +1,11 @@
 import Gravatar from 'react-gravatar'
 import React, { Fragment } from 'react'
+import ReactPaginate from 'react-paginate'
 import distanceInWordsStrict from 'date-fns/distance_in_words_strict'
 
-const SingleThread = ({ thread }) => (
+import Reply from './../../../components/Reply'
+
+const SingleThread = ({ thread, replies, handlePageChange, getPageCount }) => (
   <Fragment>
     <div className="card mb-3">
       <div className="card-header">
@@ -17,6 +20,24 @@ const SingleThread = ({ thread }) => (
         <span>{thread.replies_count} replies</span>
         <a href="" className="btn btn-primary float-right btn-xs">{thread.channel.name}</a>
       </div>
+    </div>
+    <div className="container">
+      {replies.data.map(reply => <Reply key={reply.id} reply={reply} />)}
+      <ReactPaginate
+        containerClassName="pagination"
+        pageClassName="page-item"
+        pageLinkClassName="page-link"
+        activeClassName="active"
+        previousClassName="page-item"
+        nextClassName="page-item"
+        previousLinkClassName="page-link"
+        nextLinkClassName="page-link"
+        disabledClassName="disabled"
+        breakClassName="page-link"
+        onPageChange={handlePageChange}
+        pageCount={getPageCount(replies.total, replies.per_page)}
+        forcePage={replies.current_page - 1}
+      />
     </div>
   </Fragment>
 );
