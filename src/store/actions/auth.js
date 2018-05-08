@@ -4,6 +4,7 @@ import { SubmissionError } from 'redux-form'
 import config from '../../config'
 
 export const LOGIN_USER = 'LOGIN_USER'
+export const LOGOUT_USER = 'LOGOUT_USER'
 
 export const loginUser = (values) => async (dispatch) => {
   try {
@@ -23,4 +24,11 @@ export const loginUser = (values) => async (dispatch) => {
       _error: 'Invalid credentials.'
     })
   }
+}
+
+export const logoutUser = () => (dispatch) => {
+  localStorage.removeItem('authUser')
+  dispatch({
+    type: LOGOUT_USER
+  })
 }
