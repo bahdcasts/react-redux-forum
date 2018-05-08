@@ -6,6 +6,11 @@ import LoginForm from './LoginForm';
 import { loginUser } from '../../store/actions/auth'
 
 class LoginContainer extends Component {
+  componentWillMount() {
+    if (this.props.user) {
+      return this.props.history.push('/')
+    }
+  }
   handleSubmit = async (values) => {
     await this.props.loginUser(values)
   }
