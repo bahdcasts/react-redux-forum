@@ -9,6 +9,13 @@ class LoginContainer extends Component {
   handleSubmit = async (values) => {
     await this.props.loginUser(values)
   }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.user) {
+      return this.props.history.push('/')
+    }
+  }
+
   render() {
     return (
       <LoginForm
@@ -18,8 +25,12 @@ class LoginContainer extends Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+  user: state.auth.user
+})
+
 const mapDispatchToProps = (dispatch) => ({
   loginUser: (values) => dispatch(loginUser(values))
 })
 
-export default connect(null, mapDispatchToProps)(LoginContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);
