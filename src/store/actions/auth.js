@@ -39,9 +39,9 @@ export const registerUser = (values) => async (dispatch) => {
       payload: response.data.data
     })
   } catch (errors) {
-    console.log(errors.response)
     throw new SubmissionError({
-      _error: "Something went wrong."
+      ...errors.response.data.data,
+      _error: "Something went wrong. Please check for validation errors."
     })
   }
 }
