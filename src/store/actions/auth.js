@@ -26,6 +26,26 @@ export const loginUser = (values) => async (dispatch) => {
   }
 }
 
+export const registerUser = (values) => async (dispatch) => {
+  try {
+    const response = await axios.post(`${config.apiUrl}/register`, {
+      name: values.name,
+      email: values.email,
+      password: values.password
+    })
+  
+    dispatch({
+      type: LOGIN_USER,
+      payload: response.data.data
+    })
+  } catch (errors) {
+    console.log(errors.response)
+    throw new SubmissionError({
+      _error: "Something went wrong."
+    })
+  }
+}
+
 export const logoutUser = () => (dispatch) => {
   localStorage.removeItem('authUser')
   dispatch({
