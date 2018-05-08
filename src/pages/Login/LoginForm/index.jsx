@@ -1,8 +1,8 @@
 import React from 'react'
 import { reduxForm, Field } from 'redux-form'
 
-const LoginForm = ({ pristine, handleSubmit }) => (
-  <div className="card">
+const LoginForm = ({ pristine, handleSubmit, submitting }) => {
+  return (<div className="card">
     <div className="card-header">Login</div>
     <div className="card-body">
       <form onSubmit={handleSubmit}>
@@ -21,16 +21,16 @@ const LoginForm = ({ pristine, handleSubmit }) => (
         <div className="form-group row mb-0">
           <div className="col-md-8 offset-md-4">
             <button type="submit" className="btn btn-primary"
-              disabled={pristine}
+              disabled={submitting}
             >
               Login
-            </button>
+          </button>
           </div>
         </div>
       </form>
     </div>
-  </div>
-);
+  </div>)
+};
 
 export default reduxForm({
   form: 'login-form'

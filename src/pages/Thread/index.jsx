@@ -23,7 +23,6 @@ class ThreadContainer extends React.Component {
     this.props.getReplies(id, page.selected + 1)
   }
   render() {
-    console.log(this.props)
     return (
       <Fragment>
         {
