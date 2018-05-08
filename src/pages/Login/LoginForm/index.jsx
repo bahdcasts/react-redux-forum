@@ -1,11 +1,12 @@
 import React from 'react'
 import { reduxForm, Field } from 'redux-form'
 
-const LoginForm = ({ pristine, handleSubmit }) => (
+const LoginForm = ({ pristine, handleSubmit, submitting, error }) => (
   <div className="card">
     <div className="card-header">Login</div>
     <div className="card-body">
       <form onSubmit={handleSubmit}>
+        {error && <span className="text-danger">{error}</span>}
         <div className="form-group row">
           <label htmlFor="email" className="col-sm-4 col-form-label text-md-right">E-Mail Address</label>
           <div className="col-md-6">
@@ -21,7 +22,7 @@ const LoginForm = ({ pristine, handleSubmit }) => (
         <div className="form-group row mb-0">
           <div className="col-md-8 offset-md-4">
             <button type="submit" className="btn btn-primary"
-              disabled={pristine}
+              disabled={pristine || submitting}
             >
               Login
             </button>
