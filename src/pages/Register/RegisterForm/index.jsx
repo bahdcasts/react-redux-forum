@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react'
 import { reduxForm, Field } from 'redux-form'
 
-import RenderField from './RenderField'
 import Loader from '../../../components/Loader'
 import validateRegistrationForm from './helpers'
+import RenderField from '../../../components/RenderField'
 
 const RegisterForm = ({ handleSubmit, valid, submitting }) => (
   <div className="card">
