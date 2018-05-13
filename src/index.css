@@ -18,3 +18,10 @@ body {
 * {
   border-radius: 0px !important;
 }
+.form-control {
+  border-radius: 0px !important;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+}
