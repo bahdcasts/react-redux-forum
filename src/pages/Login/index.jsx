@@ -4,10 +4,24 @@ import { connect } from 'react-redux'
 import LoginForm from './LoginForm';
 import { loginUser } from '../../store/actions/auth'
 
+import { loginUser } from '../../store/actions/auth'
+
 class LoginContainer extends Component {
+  componentWillMount() {
+    if (this.props.user) {
+      return this.props.history.push('/')
+    }
+  }
   handleSubmit = async (values) => {
     await this.props.loginUser(values)
   }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.user) {
+      return this.props.history.push('/')
+    }
+  }
+
   render() {
     return (
       <LoginForm
@@ -17,8 +31,12 @@ class LoginContainer extends Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+  user: state.auth.user
+})
+
 const mapDispatchToProps = (dispatch) => ({
   loginUser: (values) => dispatch(loginUser(values))
 })
 
-export default connect(null, mapDispatchToProps)(LoginContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);

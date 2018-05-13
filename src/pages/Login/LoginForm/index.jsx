@@ -1,8 +1,10 @@
 import React from 'react'
 import { reduxForm, Field } from 'redux-form'
 
-const LoginForm = ({ pristine, handleSubmit, submitting }) => {
-  return (<div className="card">
+import Loader from '../../../components/Loader'
+
+const LoginForm = ({ pristine, handleSubmit, submitting, error }) => (
+  <div className="card">
     <div className="card-header">Login</div>
     <div className="card-body">
       <form onSubmit={handleSubmit}>
@@ -20,17 +22,17 @@ const LoginForm = ({ pristine, handleSubmit, submitting }) => {
         </div>
         <div className="form-group row mb-0">
           <div className="col-md-8 offset-md-4">
+          {error && <p className="text-danger font-weight-bold mb-2">{error}</p>}
             <button type="submit" className="btn btn-primary"
-              disabled={submitting}
+              disabled={pristine || submitting}
             >
-              Login
-          </button>
+              {submitting ? <Loader /> : 'Login'}
+            </button>
           </div>
         </div>
       </form>
     </div>
-  </div>)
-};
+  </div>);
 
 export default reduxForm({
   form: 'login-form'

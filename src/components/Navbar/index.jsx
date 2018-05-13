@@ -1,7 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
 
-const Navbar = () => (
+import { logoutUser } from '../../store/actions/auth'
+
+const Navbar = ({ user, logoutUser }) => (
   <nav className="navbar navbar-expand-lg navbar-light navbar-forum">
     <div className="container">
       <Link className="navbar-brand" to="/">React-Forum</Link>
@@ -11,22 +14,31 @@ const Navbar = () => (
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto" />
         <ul className="navbar-nav ml-auto">
-          <li className="nav-item dropdown">
-            <a id="navbarDropdown" className="nav-link dropdown-toggle" href="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Kati Frantz<span className="caret" />
-            </a>
-            <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a className="dropdown-item" href="">
-                Logout
-            </a>
-            </div>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/login">Login</Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/register">Register</Link>
-          </li>
+          {
+            user &&
+            <li className="nav-item dropdown">
+              <a id="navbarDropdown" className="nav-link dropdown-toggle" href="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {user.name}<span className="caret" />
+              </a>
+              <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                <Link className="dropdown-item" to="/" onClick={logoutUser}>
+                  Logout
+                </Link>
+              </div>
+            </li>
+          }
+          {
+            !user &&
+            <li className="nav-item">
+              <Link className="nav-link" to="/login">Login</Link>
+            </li>
+          }
+          {
+            !user &&
+            <li className="nav-item">
+              <Link className="nav-link" to="/register">Register</Link>
+            </li>
+          }
         </ul>
       </div>
     </div>
@@ -34,4 +46,12 @@ const Navbar = () => (
 
 );
 
-export default Navbar;
+const mapStateToProps = (state) => ({
+  user: state.auth.user
+})
+
+const mapDispatchToProps = dispatch => ({
+  logoutUser: () => dispatch(logoutUser())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
