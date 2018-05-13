@@ -5,17 +5,33 @@ import distanceInWordsStrict from 'date-fns/distance_in_words_strict'
 
 import Loader from '../../../components/Loader'
 import Reply from './../../../components/Reply'
+import EditThreadForm from './../EditThreadForm'
 
-const SingleThread = ({ thread, replies, handlePageChange, getPageCount, loadingReplies }) => (
+const SingleThread = ({ thread, switchEditing, editing, replies, user, handlePageChange, getPageCount, loadingReplies }) => (
   <Fragment>
     <div className="card mb-3">
       <div className="card-header">
         <Gravatar email={thread.creator.email} className="mr-3 rounded-circle" width="30px" height="30px" />
         <span className="text-sm text-muted">{thread.creator.name}, <b>{distanceInWordsStrict(new Date(), thread.created_at)} ago</b></span>
+        { 
+          user && user.id === thread.creator.id &&
+          <button onClick={switchEditing} className={`btn ${editing ? 'btn-danger' : 'btn-info'} btn-xs float-right`}>
+            {editing ? 'Cancel' : 'Edit'}
+          </button>
+        }
       </div>
       <div className="card-body">
-        <h5 className="text-center">{thread.title}</h5>
-        <p className="text-center">{thread.body}</p>
+        {
+          !editing &&
+          <Fragment>
+            <h5 className="text-center">{thread.title}</h5>
+            <p className="text-center">{thread.body}</p>
+          </Fragment>
+        }
+        {
+          editing &&
+          <EditThreadForm />
+        }
       </div>
       <div className="card-footer text-muted">
         <span>{thread.replies_count} replies</span>

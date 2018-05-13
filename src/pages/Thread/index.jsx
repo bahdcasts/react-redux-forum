@@ -8,6 +8,14 @@ import { getThread } from '../../store/actions/threads'
 import { getReplies } from '../../store/actions/replies'
 
 class ThreadContainer extends React.Component {
+  state = {
+    editing: false
+  }
+
+  switchEditing = () => {
+    this.setState({ editing: !this.state.editing })
+  }
+
   componentWillMount() {
     const { id } = this.props.match.params
     this.props.getThread(id)
@@ -23,7 +31,6 @@ class ThreadContainer extends React.Component {
     this.props.getReplies(id, page.selected + 1)
   }
   render() {
-    console.log(this.props)
     return (
       <Fragment>
         {
@@ -34,6 +41,9 @@ class ThreadContainer extends React.Component {
             getPageCount={this.getPageCount}
             handlePageChange={this.handlePageChange}
             loadingReplies={this.props.loadingReplies}
+            user={this.props.user}
+            switchEditing={this.switchEditing}
+            editing={this.state.editing}
           />
         }
         {
@@ -49,7 +59,8 @@ const mapStateToProps = (state) => ({
   thread: state.thread.data,
   loading: state.thread.loading,
   loadingReplies: state.thread.loadingReplies,
-  replies: state.thread.replies
+  replies: state.thread.replies,
+  user: state.auth.user
 })
 
 const mapDispatchToProps = (dispatch) => ({
