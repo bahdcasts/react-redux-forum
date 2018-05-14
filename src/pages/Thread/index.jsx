@@ -4,8 +4,8 @@ import React, { Fragment } from 'react'
 import SingleThread from './SingleThread'
 import Loader from '../../components/Loader'
 
-import { getThread } from '../../store/actions/threads'
 import { getReplies } from '../../store/actions/replies'
+import { getThread, updateThread } from '../../store/actions/threads'
 
 class ThreadContainer extends React.Component {
   state = {
@@ -14,6 +14,16 @@ class ThreadContainer extends React.Component {
 
   switchEditing = () => {
     this.setState({ editing: !this.state.editing })
+  }
+
+  handleUpdateThread = async (id, values) => {
+    await this.props.updateThread(id, values)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.editedThread) {
+      this.switchEditing()
+    }
   }
 
   componentWillMount() {
@@ -44,6 +54,7 @@ class ThreadContainer extends React.Component {
             user={this.props.user}
             switchEditing={this.switchEditing}
             editing={this.state.editing}
+            handleUpdateThread={this.handleUpdateThread}
           />
         }
         {
@@ -60,7 +71,8 @@ const mapStateToProps = (state) => ({
   loading: state.thread.loading,
   loadingReplies: state.thread.loadingReplies,
   replies: state.thread.replies,
-  user: state.auth.user
+  user: state.auth.user,
+  editedThread: state.editThread.thread
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -69,7 +81,8 @@ const mapDispatchToProps = (dispatch) => ({
   },
   getReplies: (id, page) => {
     dispatch(getReplies(id, page))
-  }
+  },
+  updateThread: (id, data) => dispatch(updateThread(id, data))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ThreadContainer)

@@ -7,7 +7,7 @@ import Loader from '../../../components/Loader'
 import Reply from './../../../components/Reply'
 import EditThreadForm from './../EditThreadForm'
 
-const SingleThread = ({ thread, switchEditing, editing, replies, user, handlePageChange, getPageCount, loadingReplies }) => (
+const SingleThread = ({ thread, switchEditing, editing, replies, user, handlePageChange, getPageCount, loadingReplies, handleUpdateThread }) => (
   <Fragment>
     <div className="card mb-3">
       <div className="card-header">
@@ -30,7 +30,7 @@ const SingleThread = ({ thread, switchEditing, editing, replies, user, handlePag
         }
         {
           editing &&
-          <EditThreadForm />
+          <EditThreadForm onSubmit={async (values) => await handleUpdateThread(thread.id, values)} initialValues={thread} />
         }
       </div>
       <div className="card-footer text-muted">
