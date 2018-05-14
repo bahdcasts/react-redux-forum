@@ -6,6 +6,7 @@ import distanceInWordsStrict from 'date-fns/distance_in_words_strict'
 import Loader from '../../../components/Loader'
 import Reply from './../../../components/Reply'
 import EditThreadForm from './../EditThreadForm'
+import CreateReplyButton from './../../../components/CreateReply/CreateReplyButton'
 
 const SingleThread = ({ thread, switchEditing, editing, replies, user, handlePageChange, getPageCount, loadingReplies, handleUpdateThread }) => (
   <Fragment>
@@ -13,7 +14,7 @@ const SingleThread = ({ thread, switchEditing, editing, replies, user, handlePag
       <div className="card-header">
         <Gravatar email={thread.creator.email} className="mr-3 rounded-circle" width="30px" height="30px" />
         <span className="text-sm text-muted">{thread.creator.name}, <b>{distanceInWordsStrict(new Date(), thread.created_at)} ago</b></span>
-        { 
+        {
           user && user.id === thread.creator.id &&
           <button onClick={switchEditing} className={`btn ${editing ? 'btn-danger' : 'btn-info'} btn-xs float-right`}>
             {editing ? 'Cancel' : 'Edit'}
@@ -42,6 +43,11 @@ const SingleThread = ({ thread, switchEditing, editing, replies, user, handlePag
       !loadingReplies &&
       <div className="container">
         {replies.data.map(reply => <Reply key={reply.id} reply={reply} />)}
+        <div className="row">
+          <div className="col-md-12">
+            <CreateReplyButton />
+          </div>
+        </div>
         <div className="row justify-content-center">
           <ReactPaginate
             containerClassName="pagination"

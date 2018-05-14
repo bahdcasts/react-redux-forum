@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import Channels from './components/Channels';
 import AppRouter from './components/AppRouter';
 import CreateThread from './components/CreateThread'
+import CreateReply from './components/CreateReply'
 import CreateThreadButton from './components/CreateThread/CreateThreadButton'
 
 class App extends Component {
@@ -12,6 +13,7 @@ class App extends Component {
     return (
       <Fragment>
         <Navbar />
+        <CreateReply />
         <CreateThread />
         <div className="my-4">
           <div className="container">
