@@ -11,11 +11,11 @@ export const GET_THREAD_LOADING = 'GET_THREAD_LOADING'
 export const GET_THREADS_LOADED = 'GET_THREADS_LOADED'
 export const GET_THREADS_LOADING = 'GET_THREADS_LOADING'
 
-export const getThreads = (page = 1) => async (dispatch, getState) => {
+export const getThreads = () => async (dispatch, getState) => {
   dispatch({
     type: GET_THREADS_LOADING
   })
-  const response = await axios.get(`${config.apiUrl}/threads?page=${page}`)
+  const response = await axios.get(`${config.apiUrl}/threads${getState().router.location.search}`)
 
   dispatch({
     type: GET_THREADS,
