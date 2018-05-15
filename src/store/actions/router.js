@@ -5,7 +5,7 @@ export const changeQueryParam = (name, value) => (dispatch, getState) => {
   const { location } = getState().router
   const query = parse(location.search)
   
-  if (query[name]) {
+  if (query[name] && name !== 'page') {
     delete query[name]
   } else {
     query[name] = value

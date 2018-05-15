@@ -25,3 +25,7 @@ body {
   -o-appearance: none;
   appearance: none;
 }
+
+.list-group-item {
+  cursor: pointer;
+}
