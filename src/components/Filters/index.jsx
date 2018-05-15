@@ -2,17 +2,13 @@ import React from 'react'
 import { parse } from 'query-string'
 import { connect } from 'react-redux'
 
-import { changeQueryParam } from '../../store/actions/router' 
+import CheckedIcon from '../CheckedIcon'
 
-const CheckedIcon = () => ((
-  <span className="mr-2">
-    <ion-icon name="checkmark"></ion-icon>
-  </span>
-))
+import { changeQueryParam, clearQueryParams } from '../../store/actions/router' 
 
-const Filters = ({ mostPopular, setUnanswered, by, popular, unanswered, user, myThreads }) => ((
+const Filters = ({ mostPopular, setUnanswered, by, popular, unanswered, user, myThreads, clearParams }) => ((
   <ul className="list-group mb-3">
-    <li className="list-group-item">All</li>
+    <li className="list-group-item" onClick={clearParams}>All</li>
     {
       user &&
       <li className="list-group-item" onClick={() => myThreads(user.username)}>
@@ -38,5 +34,6 @@ export default connect(state => ({
 }), dispatch => ({
   mostPopular: () => dispatch(changeQueryParam('popular', true)),
   setUnanswered: () => dispatch(changeQueryParam('unanswered', true)),
-  myThreads: (name) => dispatch(changeQueryParam('by', name))
+  myThreads: (name) => dispatch(changeQueryParam('by', name)),
+  clearParams: () => dispatch(clearQueryParams())
 }))(Filters)

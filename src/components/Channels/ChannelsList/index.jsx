@@ -1,8 +1,21 @@
 import React from 'react'
 
-const ChannelsList = ({ channels }) => (
+import CheckedIcon from '../../CheckedIcon'
+
+const ChannelsList = ({ channels, setChannelQuery, selectedChannel }) => (
   <ul className="list-group">
-    {channels.map(channel => <li key={channel.id} className="list-group-item">{channel.name}</li>)}
+    {channels.map(channel => (
+      <li
+        key={channel.id}
+        onClick={() => setChannelQuery(channel.slug)}
+        className="list-group-item">
+        {
+          selectedChannel === channel.slug &&
+          <CheckedIcon />
+        }
+        {channel.name}
+      </li>
+    ))}
   </ul>
 );
 
