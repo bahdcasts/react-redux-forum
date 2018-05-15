@@ -6,6 +6,7 @@
     "axios": "^0.18.0",
     "date-fns": "^1.29.0",
     "history": "^4.7.2",
+    "noty": "^3.2.0-beta",
     "query-string": "^6.1.0",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",

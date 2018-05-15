@@ -2,6 +2,7 @@ import { combineReducers } from 'redux'
 import { routerReducer } from 'react-router-redux'
 import { reducer as formReducer } from 'redux-form'
 
+import notyReducer from './noty'
 import authReducer from './auth'
 import threadReducer from './thread'
 import threadsReducer from './threads'
@@ -16,6 +17,7 @@ const reducer = combineReducers({
   thread: threadReducer,
   form: formReducer,
   auth: authReducer,
+  noty: notyReducer,
   createThread: createThreadReducer,
   editThread: editThreadReducer,
   createReply: createReplyReducer,

@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 
+import Noty from './components/Noty'
 import Navbar from './components/Navbar';
 import Filters from './components/Filters'
 import Channels from './components/Channels';
@@ -13,6 +14,7 @@ class App extends Component {
     const isNotAuthPath = this.props.history.location.pathname !== '/register' && this.props.history.location.pathname !== '/login';
     return (
       <Fragment>
+        <Noty />
         <Navbar />
         <CreateReply />
         <CreateThread />
