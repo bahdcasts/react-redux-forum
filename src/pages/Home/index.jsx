@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import loadingGif from '../../loading.gif'
 import HomeThreads from './HomeThreads';
 import { getThreads } from '../../store/actions/threads'
-import { addQueryParam } from '../../store/actions/router'
+import { changeQueryParam } from '../../store/actions/router'
 
 class HomeContainer extends Component {
   componentWillMount() {
@@ -22,11 +22,10 @@ class HomeContainer extends Component {
   }
 
   handlePageChange = (page) => {
-    this.props.addQueryParam('page', page.selected + 1)
+    this.props.changeQueryParam('page', page.selected + 1)
   }
 
   render() {
-    console.log(this.props.threadsData)
     return (
       <div>
         {
@@ -59,7 +58,7 @@ const mapDispatchToProps = (dispatch) => ({
   getThreads: (page) => {
     dispatch(getThreads(page))
   },
-  addQueryParam: (name, value) => dispatch(addQueryParam(name, value))
+  changeQueryParam: (name, value) => dispatch(changeQueryParam(name, value))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer);

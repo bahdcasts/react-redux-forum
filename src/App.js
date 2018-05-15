@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 
 import Navbar from './components/Navbar';
+import Filters from './components/Filters'
 import Channels from './components/Channels';
 import AppRouter from './components/AppRouter';
 import CreateThread from './components/CreateThread'
@@ -22,6 +23,7 @@ class App extends Component {
                  isNotAuthPath &&
                 <div className="col-md-4">
                   <CreateThreadButton />
+                  <Filters />
                   <Channels />
                 </div>
               }
