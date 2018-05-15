@@ -1,17 +1,18 @@
 import React, { Fragment } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 
-import Home from '../../pages/Home';
 import Login from '../../pages/Login';
 import Thread from '../../pages/Thread'
+import Threads from '../../pages/Threads';
 import Register from '../../pages/Register';
 
 const AppRouter = () => (
   <Fragment>
-    <Route path="/" exact component={Home} />
     <Route path="/login" component={Login} />    
+    <Route path="/threads" component={Threads} />    
     <Route path="/register" component={Register} />  
-    <Route path="/thread/:id" component={Thread} />  
+    <Route path="/thread/:id" component={Thread} />
+    <Route path="/" exact render={() => <Redirect to="/threads" />} />
   </Fragment>
 );
 
