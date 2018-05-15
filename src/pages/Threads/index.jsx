@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import Threads from './Threads';
 import loadingGif from '../../loading.gif'
-import HomeThreads from './HomeThreads';
 import { getThreads } from '../../store/actions/threads'
+import { changeQueryParams } from '../../store/actions/router'
 
-class HomeContainer extends Component {
+class ThreadsContainer extends Component {
   componentWillMount() {
     this.props.getThreads();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.router.location.search !== this.props.router.location.search) {
+      this.props.getThreads()
+    }
   }
 
   getPageCount = (total, perPage) => {
@@ -15,16 +22,15 @@ class HomeContainer extends Component {
   }
 
   handlePageChange = (page) => {
-    this.props.getThreads(page.selected + 1);
+    this.props.changeQueryParams(page.selected + 1);
   }
 
   render() {
-    console.log(this.props.threadsData)
     return (
       <div>
         {
           !this.props.loading &&
-          <HomeThreads
+          <Threads
             threads={this.props.threadsData.data}
             handlePageChange={this.handlePageChange}
             pageCount={this.getPageCount(this.props.threadsData.total, this.props.threadsData.per_page)}
@@ -44,13 +50,17 @@ class HomeContainer extends Component {
 
 const mapStateToProps = (state) => ({
   threadsData: state.threads,
-  loading: state.threads.loading
+  loading: state.threads.loading,
+  router: state.router
 })
 
 const mapDispatchToProps = (dispatch) => ({
   getThreads: (page) => {
     dispatch(getThreads(page))
+  },
+  changeQueryParams: (value) => {
+    dispatch(changeQueryParams(value, 'page'))
   }
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(ThreadsContainer);

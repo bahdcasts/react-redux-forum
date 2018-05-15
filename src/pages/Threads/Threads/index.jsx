@@ -3,7 +3,7 @@ import ReactPaginate from 'react-paginate';
 
 import Thread from '../../../components/Thread'
 
-const HomeThreads = ({ threads, handlePageChange, pageCount, currentPage }) => (
+const Threads = ({ threads, handlePageChange, pageCount, currentPage }) => (
   <Fragment>
     {threads.map(thread => <Thread thread={thread} key={thread.id} />)}
     <div className="row justify-content-center my-5">
@@ -26,4 +26,4 @@ const HomeThreads = ({ threads, handlePageChange, pageCount, currentPage }) => (
   </Fragment>
 );
 
-export default HomeThreads;
+export default Threads;

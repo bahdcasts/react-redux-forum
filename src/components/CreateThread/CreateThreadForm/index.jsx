@@ -5,8 +5,10 @@ import RenderField from '../../RenderField'
 import RenderTextField from '../../RenderTextField'
 import RenderSelectField from '../../RenderSelectField'
 
-const CreateThreadForm = ({ channels, modalRef, submitting, invalid, handleSubmit, reset }) => ((
-  <div ref={modalRef} className="modal fade" id="createThread" tabIndex={-1} role="dialog" aria-labelledby="createThreadLabel" aria-hidden="true">
+import validateCreateThreadForm from './helpers'
+
+const CreateThreadForm = ({ channels, handleSubmit, submitting, reset, invalid }) => ((
+  <div className="modal fade" id="createThread" tabIndex={-1} role="dialog" aria-labelledby="createThreadLabel" aria-hidden="true">
     <div className="modal-dialog" role="document">
       <div className="modal-content">
         <form onSubmit={handleSubmit}>
@@ -33,11 +35,10 @@ const CreateThreadForm = ({ channels, modalRef, submitting, invalid, handleSubmi
             </div>
           </div>
           <div className="modal-footer">
-            <button type="button" onClick={reset} className="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" disabled={submitting || invalid} className="btn btn-info">Create Thread</button>
+            <button type="button" className="btn btn-secondary" onClick={reset} data-dismiss="modal">Close</button>
+            <button type="submit" className="btn btn-info" disabled={submitting || invalid}>Create Thread</button>
           </div>
         </form>
-
       </div>
     </div>
   </div>
@@ -45,5 +46,6 @@ const CreateThreadForm = ({ channels, modalRef, submitting, invalid, handleSubmi
 ))
 
 export default reduxForm({
-  form: 'create-thread-form'
+  form: 'create-thread-form',
+  validate: validateCreateThreadForm
 })(CreateThreadForm)

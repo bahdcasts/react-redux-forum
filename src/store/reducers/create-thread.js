@@ -10,6 +10,6 @@ const createThreadReducer = (state = {}, action) => {
     default:
       return state
   }
-}
+} 
 
 export default createThreadReducer
