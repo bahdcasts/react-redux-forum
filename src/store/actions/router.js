@@ -1,5 +1,5 @@
 import { push } from 'react-router-redux'
-import { parse, stringify } from 'query-string'
+import { parse, stringify } from '../../lib/query-string'
 
 export const clearQueryParams = () => (dispatch, getState) => {
   const { location } = getState().router

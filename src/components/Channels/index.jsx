@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { parse } from 'query-string'
+import { parse } from '../../lib/query-string'
 
 import Loader from './../Loader'
 import getChannels from '../../store/actions/channels';

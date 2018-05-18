@@ -1,6 +1,6 @@
 import React from 'react'
-import { parse } from 'query-string'
 import { connect } from 'react-redux'
+import { parse } from '../../lib/query-string'
 
 import CheckedIcon from '../CheckedIcon'
 
